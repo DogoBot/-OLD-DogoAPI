@@ -33,7 +33,6 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile group: 'io.netty', name: 'netty-all', version: '4.0.4.Final'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile group: 'org.json', name: 'json', version: '20090211'
 }
