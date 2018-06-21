@@ -1,6 +1,5 @@
 package cf.dogo.api
 
-import org.json.JSONObject
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
