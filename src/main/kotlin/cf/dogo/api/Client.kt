@@ -23,7 +23,7 @@ class Client constructor(ip : String, port : Int, name : String){
 
     fun connect(){
         for (i in 1..3){
-            println("Trying to connect do server...")
+            println("Trying to connect to server...")
             try{
                 this.socket = Socket(ip, port)
                 this.input = Scanner(this.socket?.getInputStream())
@@ -33,7 +33,7 @@ class Client constructor(ip : String, port : Int, name : String){
                 println("Connected!")
                 break
             } catch (ex : Exception) {
-                println("Client Failed!")
+                println("Connection Failed!")
             }
         }
     }

@@ -51,4 +51,7 @@ class ResourceController {
         val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "listtokens").put("id", id))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
+
+    @GetMapping("/api")
+    fun api() = true
 }
