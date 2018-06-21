@@ -55,7 +55,5 @@ jar {
     manifest {
         attributes 'Main-Class': 'cf.dogo.api.DogoAPIKt'
     }
-    //baseName = 'gs-actuator-service'
-    version =  '0.1.0'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
