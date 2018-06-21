@@ -52,6 +52,7 @@ compileTestKotlin {
 }
 
 jar {
+    enabled = true
     manifest {
         attributes 'Main-Class': 'cf.dogo.api.DogoAPIKt'
     }
