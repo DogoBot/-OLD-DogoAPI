@@ -13,7 +13,7 @@ buildscript {
     }
 }
 
-group 'cf.dogo'
+group 'cf.dogo.api'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'kotlin'
