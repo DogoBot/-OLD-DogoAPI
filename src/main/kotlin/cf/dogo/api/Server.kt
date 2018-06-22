@@ -1,6 +1,7 @@
 package cf.dogo.api
 
 import org.json.JSONObject
+import sun.net.ConnectionResetException
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintStream
@@ -38,20 +39,24 @@ abstract class Server constructor(val port : Int = 4676, val name : String, var 
             super.run()
             while(true){
                 for(sck in srv.connections){
-                    if(!sck.isClosed && sck.isConnected){
-                        val scan = BufferedReader(InputStreamReader(sck.getInputStream()))
-                        val content = scan.readLine()
-                        if(content != null) {
-                            val json = JSONObject(content)
-                            val response = JSONObject()
-                                    .put(
-                                            "data",
-                                            srv.onRequest(json.getInt("id"), json.getJSONObject("data"), sck)
-                                    )
-                                    .put("id", json.getInt("id"))
-                            print(response)
-                            sck.getOutputStream().write(json.toString().toByteArray())
+                    try {
+                        if (!sck.isClosed && sck.isConnected) {
+                            val scan = BufferedReader(InputStreamReader(sck.getInputStream()))
+                            val content = scan.readLine()
+                            if (content != null) {
+                                val json = JSONObject(content)
+                                val response = JSONObject()
+                                        .put(
+                                                "data",
+                                                srv.onRequest(json.getInt("id"), json.getJSONObject("data"), sck)
+                                        )
+                                        .put("id", json.getInt("id"))
+                                print(response)
+                                sck.getOutputStream().write(json.toString().toByteArray())
+                            }
                         }
+                    }catch (ex : ConnectionResetException){
+                        srv.connections.remove(sck)
                     }
                 }
             }
