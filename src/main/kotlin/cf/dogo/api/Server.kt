@@ -9,7 +9,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import kotlin.collections.ArrayList
 
-abstract class Server constructor(val port : Int = 4676, val name : String, var logger : PrintStream = System.out) {
+abstract class Server constructor(val port : Int = 4676, val name : String, var logger : PrintStream) {
     var socket = ServerSocket(port)
     var connections = ArrayList<Socket>()
     val connectionListener = ConnectionListener(this)
