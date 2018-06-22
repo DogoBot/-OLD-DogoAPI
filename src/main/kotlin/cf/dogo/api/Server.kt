@@ -52,8 +52,7 @@ abstract class Server constructor(val port : Int = 4676, val name : String, var 
                                                 srv.onRequest(json.getInt("id"), json.getJSONObject("data"), sck)
                                         )
                                         .put("id", json.getInt("id"))
-                                print(response)
-                                sck.getOutputStream().write(json.toString().toByteArray())
+                                PrintStream(sck.getOutputStream()).println(response.toString())
                             }
                         }
                     }catch (ex : SocketException){
