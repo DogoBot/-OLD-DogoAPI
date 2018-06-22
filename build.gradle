@@ -55,5 +55,4 @@ jar {
     manifest {
         attributes 'Main-Class': 'cf.dogo.api.DogoAPIKt'
     }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
+ }

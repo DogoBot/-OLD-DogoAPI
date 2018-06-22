@@ -17,7 +17,7 @@ fun main(args : Array<String>) {
     //yep, that == true is required
     if(DogoAPI.connection?.isAvailabe() == true) {
         runApplication<DogoAPI>(*args)
-        } else {
+    } else {
         Thread.sleep(30000)
         main(args)
     }
