@@ -60,8 +60,7 @@ class Client constructor(ip : String, port : Int, name : String){
         }
     }
 
-    class InputListener(con : Client) : Thread("${con.name} InputListener"){
-        val con = con
+    class InputListener(val con : Client) : Thread("${con.name} InputListener"){
         override fun run() {
             while (true) {
                 if(con.isAvailabe() && con.input?.hasNextLine() as Boolean){

@@ -8,9 +8,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import kotlin.collections.ArrayList
 
-abstract class Server constructor(port : Int = 4676, name : String, logger : PrintStream = System.out) {
-    val logger = logger
-    val name = name;
+abstract class Server constructor(val port : Int = 4676, val name : String, var logger : PrintStream = System.out) {
     var socket = ServerSocket(port)
     var connections = ArrayList<Socket>()
     val connectionListener = ConnectionListener(this)
@@ -20,9 +18,7 @@ abstract class Server constructor(port : Int = 4676, name : String, logger : Pri
 
 
 
-    class ConnectionListener(srv : Server) : Thread("${srv.name} ConnectionListener") {
-        val srv = srv;
-
+    class ConnectionListener(val srv : Server) : Thread("${srv.name} ConnectionListener") {
         override fun run() {
             super.run()
             while(true) {
@@ -37,9 +33,7 @@ abstract class Server constructor(port : Int = 4676, name : String, logger : Pri
             }
         }
     }
-    class InputListener(srv : Server) : Thread("${srv.name} InputListener") {
-        val srv = srv;
-
+    class InputListener(val srv : Server) : Thread("${srv.name} InputListener") {
         override fun run() {
             super.run()
             while(true){
