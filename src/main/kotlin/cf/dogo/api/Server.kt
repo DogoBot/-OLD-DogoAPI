@@ -7,6 +7,7 @@ import java.io.InputStreamReader
 import java.io.PrintStream
 import java.net.ServerSocket
 import java.net.Socket
+import java.net.SocketException
 import kotlin.collections.ArrayList
 
 abstract class Server constructor(val port : Int = 4676, val name : String, var logger : PrintStream) {
@@ -55,7 +56,7 @@ abstract class Server constructor(val port : Int = 4676, val name : String, var 
                                 sck.getOutputStream().write(json.toString().toByteArray())
                             }
                         }
-                    }catch (ex : ConnectionResetException){
+                    }catch (ex : SocketException){
                         srv.connections.remove(sck)
                     }
                 }
