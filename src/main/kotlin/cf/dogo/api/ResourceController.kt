@@ -10,25 +10,25 @@ import javax.servlet.http.HttpServletRequest
 class ResourceController {
     @GetMapping("/guild/{id}")
     fun guild(@PathVariable("id") id: String, @RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "guild").put("id", id))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "guild").put("id", id))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
     @GetMapping("/user/{id}")
     fun user(@PathVariable("id") id: String, @RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "user").put("id", id))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "user").put("id", id))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
     @GetMapping("/permgroup/{id}")
     fun permgroup(@PathVariable("id") id: String, @RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "permgroup").put("id", id))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "permgroup").put("id", id))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
     @GetMapping("/stats")
     fun user(@RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "stats"))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "stats"))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
@@ -37,9 +37,9 @@ class ResourceController {
             @RequestBody body : String,
             @RequestParam("token", required = false) token : String?
     ) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(
+        val response = DogoAPI.connection?.request(
                 JSONObject().put("token", token).put("iwant", "addtoken")
-                        .put("body", body)
+                        .put("body", JSONObject(body))
 
         )
         return ResponseEntity(response.toString(), HttpStatus.OK)
@@ -47,19 +47,19 @@ class ResourceController {
 
     @DeleteMapping("/token/{id}")
     fun tokenDelete(@PathVariable("id") id: String, @RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "removetoken").put("id", id))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "removetoken").put("id", id))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
     @GetMapping("/token")
     fun tokenGet(@RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "listtokens"))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "listtokens"))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
     @GetMapping("/token/{id}")
     fun tokenGet(@PathVariable("id") id: String, @RequestParam("token", required = false) token : String?) : ResponseEntity<*>{
-        val response = DogoAPI.connection?.requestG(JSONObject().put("token", token).put("iwant", "tokeninfo").put("id", id))
+        val response = DogoAPI.connection?.request(JSONObject().put("token", token).put("iwant", "tokeninfo").put("id", id))
         return ResponseEntity(response.toString(), HttpStatus.OK)
     }
 
